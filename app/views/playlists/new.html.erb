@@ -1,0 +1,25 @@
+<h1><div style="text-align: center;">Create Playlist</div></h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+    </div>
+    <div class="col-sm">
+      <%= form_with model: @playlist do |form| %>
+        <%= form.label :title, "Name" %>
+        <%= form.text_field :title, placeholder: 'Music Monday #42'%>
+        <%= form.submit %>
+      <% end %>
+
+      <% if @playlist.errors.any? %>
+        <% @playlist.errors.full_messages.each do |message| %>
+          <div class="danger">
+            <%= message %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-sm">
+    </div>
+  </div>
+</div>
