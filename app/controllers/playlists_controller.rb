@@ -23,10 +23,7 @@ class PlaylistsController < ApplicationController
   end
 
   def add_song
-    url = params[:url]
-    song_id = youtube_id(url)
-    Rails.logger.info("Given URL(#{url}) -- extracted ID(#{song_id})")
-    title = Yt::Video.new(id: song_id).title
+    title = get_title_from_url(params[:url])
     @playlist.songs.create(song_url: url, title: title)
   end
 
@@ -49,5 +46,10 @@ class PlaylistsController < ApplicationController
     else
       nil
     end
+  end
+
+  def get_title_from_url(url)
+    song_id = youtube_id(url)
+    Yt::Video.new(id: song_id).title
   end
 end
