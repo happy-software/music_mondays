@@ -1,5 +1,5 @@
 class PlaylistsController < ApplicationController
-  before_action :set_playlist, only: [:show]
+  before_action :set_playlist, only: [:show, :add_song]
 
   def new
     @playlist = Playlist.new
@@ -20,6 +20,10 @@ class PlaylistsController < ApplicationController
 
   def show
     @songs = @playlist.song_urls
+  end
+
+  def add_song
+    @playlist.songs.create(song_url: params[:url])
   end
 
   private

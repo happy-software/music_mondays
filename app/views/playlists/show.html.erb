@@ -2,6 +2,7 @@
 
 <div id="player-container"
      data-controller="playlist"
+     data-playlist-submission-url-value="<%= add_song_playlist_path(@playlist) %>"
 >
   <div data-playlist-target="player"></div>
 
@@ -25,7 +26,6 @@
 
   <div>
     Add Song: <input data-playlist-target="newSong"
-                     data-submissionUrl-value="<%= 'TODO: Update to submission path' %>"
                      type="text"
                      placeholder="https://www.youtube.com/watch?v=uVi635mDYes">
     <button id="addSongButton" data-action="click->playlist#addSong">Add +</button>

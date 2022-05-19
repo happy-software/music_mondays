@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  resources :playlists, only: [:new, :create, :show, :index]
+  resources :playlists, only: [:new, :create, :show, :index] do
+    member do
+      post "add-song"
+    end
+  end
+
   root "playlists#new"
 end
