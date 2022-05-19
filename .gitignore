@@ -37,3 +37,6 @@
 
 # Ignore IDE files
 .idea/
+
+# Env files
+.env*
