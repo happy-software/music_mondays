@@ -1,24 +1,23 @@
-# README
+# Music Mondays
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Music Mondays lets you create a shared playlist with the whole squad.
 
-Things you may want to cover:
+Anyone can contribute.
 
-* Ruby version
 
-* System dependencies
+## Getting started
 
-* Configuration
+| Dependency | Version |
+|------------|---------|
+| Ruby       | 3.2.1   |
+| Rails      | 7.0.2   |
 
-* Database creation
+Get started locally with:
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```sh
+git clone git@github.com:happy-software/music_mondays.git
+cd ./music_mondays
+bundle install
+bundle exec rails db:create db:migrate
+bundle exec rails server
+```
