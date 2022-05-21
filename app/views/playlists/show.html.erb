@@ -1,33 +1,33 @@
-<h1><%= @playlist.title %></h1>
+<h1 class="text-capitalize text-center"><%= @playlist.title %></h1>
 
-<div id="player-container"
-     data-controller="playlist"
-     data-playlist-submission-url-value="<%= add_song_playlist_path(@playlist) %>"
->
-  <div data-playlist-target="player"></div>
-
-  <button id='playButton' data-action="click->playlist#play">Play</button>
-  <button id='pauseButton' data-action="click->playlist#pause">Pause</button>
-  <button id='nextButton' data-action="click->playlist#next">Next</button>
-
-  <div>
-    <ol data-playlist-target="songList">
-    <% @songs.each do |song| %>
-      <li
-        data-playlist-target="song"
-        data-action="click->playlist#play"
-        data-playlist-url-param="<%= song %>"
-      >
-        <%= song %>
-      </li>
-    <% end %>
-    </ol>
+<div class="row">
+<div class="col-sm"></div>
+<div class="col-sm-5">
+  <div id="player-container" data-controller="playlist" data-playlist-submission-url-value="<%= add_song_playlist_path(@playlist) %>">
+    <div data-playlist-target="player" class="row"></div>
+    <div class="row mt-4">
+      <ul data-playlist-target="songList" class="list-group" id="song-list-group">
+      <% @songs.each do |song| %>
+        <li
+          data-playlist-target="song"
+          data-action="click->playlist#play"
+          data-playlist-url-param="<%= song.song_url %>"
+          class="list-group-item"
+        >
+          <%= song.title %>
+        </li>
+      <% end %>
+      </ul>
+    </div>
+    <div>
+      Add Song: <input data-playlist-target="newSong"
+                       type="text"
+                       placeholder="Paste link here... (e.g. https://www.youtube.com/watch?v=uVi635mDYes)"
+                       class="form-control"
+                >
+      <button id="addSongButton" class="btn btn-dark mt-2" data-action="click->playlist#addSong">Add +</button>
+    </div>
   </div>
-
-  <div>
-    Add Song: <input data-playlist-target="newSong"
-                     type="text"
-                     placeholder="https://www.youtube.com/watch?v=uVi635mDYes">
-    <button id="addSongButton" data-action="click->playlist#addSong">Add +</button>
-  </div>
+</div>
+<div class="col-sm"></div>
 </div>

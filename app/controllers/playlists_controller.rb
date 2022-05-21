@@ -19,12 +19,15 @@ class PlaylistsController < ApplicationController
   end
 
   def show
-    @songs = @playlist.song_urls
+    @songs = @playlist.songs
   end
 
   def add_song
-    title = get_title_from_url(params[:url])
-    @playlist.songs.create(song_url: url, title: title)
+    url = params[:url]
+    title = get_title_from_url(url)
+    song = @playlist.songs.create(song_url: url, title: title)
+
+    render(json: song)
   end
 
   private
