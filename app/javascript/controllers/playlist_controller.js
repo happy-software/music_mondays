@@ -38,7 +38,15 @@ export default class extends Controller {
   }
 
   renderPlayer(url, currentIndex) {
-    renderReactPlayer(this.playerTarget, {url, playing: true, controls: true, onEnded: this.next.bind(this, currentIndex)})
+    renderReactPlayer(this.playerTarget,
+      {
+        url,
+        playing: true,
+        controls: true,
+        onEnded: this.next.bind(this, currentIndex),
+        onError: this.next.bind(this, currentIndex)
+      }
+    )
   }
 
   async addSong() {
