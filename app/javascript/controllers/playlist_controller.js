@@ -9,8 +9,8 @@ export default class extends Controller {
 
   play(event) {
     const url = event.params.url // click event from clicking on a song
-    this.songTargets.forEach((element, index) => { element.classList.remove("active") })
-    event.target.classList.add("active")
+
+    this.setActiveSong(event.target)
     const currentIndex = Array.from(this.songTargets).indexOf(event.target)
     this.renderPlayer(url, currentIndex)
   }
@@ -34,6 +34,7 @@ export default class extends Controller {
     let nextSongElement = this.songTargets[nextIndex]
     let url = nextSongElement.dataset.playlistUrlParam
 
+    this.setActiveSong(nextSongElement)
     this.renderPlayer(url, nextIndex)
   }
 
@@ -47,6 +48,11 @@ export default class extends Controller {
         onError: this.next.bind(this, currentIndex)
       }
     )
+  }
+
+  setActiveSong(songElement) {
+    this.songTargets.forEach((element, index) => { element.classList.remove("active") })
+    songElement.classList.add("active")
   }
 
   async addSong() {
