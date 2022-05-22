@@ -7,15 +7,38 @@ export default class extends Controller {
     submissionUrl: String
   }
 
-  play() {
-    var url = event.params.url
+  play(event) {
+    const url = event.params.url // click event from clicking on a song
     this.songTargets.forEach((element, index) => { element.classList.remove("active") })
-    event.srcElement.classList.add("active")
-    renderReactPlayer(this.playerTarget, {url, playing: true, controls: true})
+    event.target.classList.add("active")
+    const currentIndex = Array.from(this.songTargets).indexOf(event.target)
+    this.renderPlayer(url, currentIndex)
   }
 
-  next() {
-    console.log("TODO: Update next() in playlist_controller")
+  next(currentIndex) {
+    console.log("Song list length: " + this.songTargets.length)
+    console.log("Current index: " + currentIndex)
+    if ((currentIndex + 1)>= this.songTargets.length) {
+    /*
+      We've reached the end of the playlist
+      or the currentIndex is somehow out of bounds.
+      Either way, don't do anything.
+    */
+      console.log("🎶🎸🤠 Congrats! You've reached the end of the playlist 💃🏼🎶🔊")
+      console.log("How about adding a new song?")
+      this.newSongTarget.focus()
+      return
+    }
+
+    let nextIndex = currentIndex + 1;
+    let nextSongElement = this.songTargets[nextIndex]
+    let url = nextSongElement.dataset.playlistUrlParam
+
+    this.renderPlayer(url, nextIndex)
+  }
+
+  renderPlayer(url, currentIndex) {
+    renderReactPlayer(this.playerTarget, {url, playing: true, controls: true, onEnded: this.next.bind(this, currentIndex)})
   }
 
   async addSong() {
