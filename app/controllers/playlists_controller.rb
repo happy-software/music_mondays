@@ -3,6 +3,7 @@ class PlaylistsController < ApplicationController
 
   def new
     @playlist = Playlist.new
+    @playlists = Playlist.order(id: :desc)
   end
 
   def create
